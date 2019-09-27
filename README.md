@@ -22,4 +22,4 @@ docsify serve docs
 
 ## Credits
 
-* [FVCproductions](https://github.com/fvcproductions) 🍫
+* [docsify-starter](https://github.com/fvcproductions/docsify-starter) 🍫
