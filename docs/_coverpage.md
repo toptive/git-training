@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/DprjTW5.png" width="150">
+<img src="/assets/img/toptive.png" width="200">
 
 # Git training <small>1.0</small>
 
