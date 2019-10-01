@@ -60,6 +60,8 @@ git cherry-pick master~2
 git cherry-pick -m 1 <hash>
 ```
 
+Be careful! It is preferred to use git merge instead of git cherry-pick. When you cherry-pick a merge commit, it collapses all the changes made into that one commit. You lose the commit history.
+
 * If you cherry-pick from a public branch, you should consider using:
 
 ```bash
@@ -68,6 +70,11 @@ git cherry-pick -x <commit-hash>
 
 This will generate a standardized commit message. This way, you (and your co-workers) can still keep track of the origin of the commit and may avoid merge conflicts in the future.
 
+* If you want to select more than one commit at once, you can add their commit hashes separated by a space:
+
+```bash
+git cherry-pick C D
+```
 
 * If you have notes attached to the commit they do not follow the cherry-pick. To bring them over as well, You have to use:
 

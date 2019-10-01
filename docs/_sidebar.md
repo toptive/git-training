@@ -1,3 +1,4 @@
 * [Home 🏠](/README)
 * [Branch Management](/md/branch-mng)
-* [Patches](/md/patches)
+* [Patching](/md/patches)
+* [Debbuging](/md/debbuging)
