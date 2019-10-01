@@ -3,9 +3,9 @@
 Here, we'll focus on how we can use different techniques to share code between branches or even different repositories.
 
 
-## [Cherry-pick](https://git-scm.com/docs/git-cherry-pick)
+## Cherry-pick
 
-![logo](/img/cherry-pick-logo.png ':size=35%') Cherry picking in git means to choose one or more existing commits from one branch and apply it onto another. This is in contrast with other ways such as *merge* and *rebase* which normally apply many commits onto another branch.
+![logo](/img/cherry-pick-logo.png ':size=35%') [Cherry picking]((https://git-scm.com/docs/git-cherry-pick)) in git means to choose one or more existing commits from one branch and apply it onto another. This is in contrast with other ways such as *merge* and *rebase* which normally apply many commits onto another branch.
 
 
 ### Cherry-picking commits
@@ -43,6 +43,7 @@ Strictly speaking, using git cherry-pick doesn’t alter the existing history wi
 #### Tips
 
 * If you want to merge without commit ids you can use this command
+
 ```bash
 git cherry-pick master~2 master~0
 ```
@@ -87,27 +88,29 @@ Cherry picking is commonly discouraged in developer community. The main reason i
 
 #### Practical Example
 
-
-
-https://www.linkedin.com/learning/git-intermediate-techniques/cherry-picking-commits
-
-
-
-
-
-
-
-
+[Cherry pick example tutorial](/md/patches-example)
 
 ### Resolve cherry-picking conflicts
 
-When we cherry-pick a commit, we're applying a predefined set of changes to our current branch. We can't be guaranteed that those changes are not going to conflict with the current state of the branch that we're in now
+When we cherry-pick a commit, we're applying a predefined set of changes to our current branch. We can't be guaranteed that those changes are not going to conflict with the current state of the branch. Like `git rebase`, you need to add the file after resolve the conflict and then continue the cherry pick.
 
-https://www.linkedin.com/learning/git-intermediate-techniques/resolve-cherry-picking-conflicts
+```bash
+git cherry-pick 914122312
+
+error: could not apply 914122312.. commit message
+hint: after resolving the conflicts, mark the corrected paths
+hint: with 'git add <path>' or 'git rm <paths>'
+hint: add commit the result with 'git commit'
+...
+...
+You are currently cherry-picking commit 914122312.
+   (fix conflicts and run 'git cherry-pick --continue')
+   (use 'git cherry-pick --abort' to cancel the cherry-pick operation)
+```
 
 ## Patches
 
-### Create a diff patch
+### Create a diff patches
 
 Diff patches are a way for us to be able to share changes using files, instead of transferring them via a "get remote repository." This is useful whenever changes are not ready for a public branch, so we don't want to push it up toward the remote repository, or when we want to work with collaborators who don't share a remote with us. This is often used during a discussion, a review, or an approval process.
 
@@ -119,10 +122,26 @@ To create a diff file we can use the following command:
 $ git diff from-commit to-commit > output.diff
 ```
 
-Then, if that file `output.diff` doesn't already exist, it will create it, and if it does already exist it will replace the contents with the output.
+where:
+* *from-commit*: the point at which we want the patch to start.
+* *to-commit*: the patch will span the changes up to and including this point.
+* *output.diff* the patch will be written here, if that file doesn't already exist, it will create it, and if it does already exist it will replace the contents with the output.
 
-https://www.linkedin.com/learning/git-intermediate-techniques/create-diff-patches
+To create a diff between branches, you can run the following command:
 
-### Apply a diff patch
+```bash
+$ git diff $(git merge-base <master> <experimental-branch>) > patch.diff
+```
 
-TODO
+Then you can apply the patch using the git apply command: git apply
+
+```bash
+git apply output.diff
+```
+
+or, just can follow the old-school using [patch](https://linux.die.net/man/1/patch), for example:
+
+```bash
+$ patch -p1 < output.diff
+```
+
