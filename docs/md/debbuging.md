@@ -102,4 +102,46 @@ Additional options:
 * `--and`: ensures multiple matches in the same line of text.
 
 ## Debugging Git network connection issues
-https://til.codes/debugging-git-network-connection-issues-using-git_trace/
+
+!> Problem: sometimes we are able to push to github but we aren't able to fetch/clone/pull from the repo. For example: `git fetch origin` it hangs there forever and doesn't respond at all.
+
+* Check your connectivity :P
+
+```bash
+$ ping google.com
+
+PING google.com (216.58.205.238): 56 data bytes
+64 bytes from 216.58.205.238: icmp_seq=0 ttl=46 time=124.577 ms
+```
+
+* Check if you have access to the repo
+Since we are able to push to repo, we are pretty sure that we have access to the repo, but still :check:
+
+* Check if ssh/https was disabled.
+
+```bash
+$ ssh git@github.com
+
+PTY allocation request failed on channel 0
+Hi manusajith! You've successfully authenticated, but GitHub does not provide shell access.
+Connection to github.com closed.
+```
+
+* Try changing your DNS to 8.8.8.8
+
+?> Welcome to `GIT_TRACE`
+
+This configuration option gives us a more verbose trace to the git network connections and all the internal commands it goes through. This environment variable can accept the following values:
+
+* `1,2 or true`: git will print trace: messages on stderr telling about alias expansion, built-in command execution and external command execution.
+
+* `greater than 1 and less than 10`:  git will interpret this value as an open file descriptor and will try to write the trace messages into this file descriptor.
+
+* `absolute path`: git will interpret this as a file path and will try to write the trace messages into it.
+
+```bash
+$ GIT_TRACE=1 git fetch origin
+
+13:44:47.299097 git.c:350               trace: built-in: git 'fetch' 'origin'
+13:44:47.403611 run-command.c:336       trace: run_command: 'ssh' 'git@github.com' 'git-upload-pack '\''woumedia/naturalblender-api.git'\'''
+```
