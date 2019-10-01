@@ -2,11 +2,9 @@
 
 Here, we'll focus on how we can use different techniques to share code between branches or even different repositories.
 
-
 ## Cherry-pick
 
-![logo](/img/cherry-pick-logo.png ':size=35%') [Cherry picking]((https://git-scm.com/docs/git-cherry-pick)) in git means to choose one or more existing commits from one branch and apply it onto another. This is in contrast with other ways such as *merge* and *rebase* which normally apply many commits onto another branch.
-
+![logo](/img/cherry-pick-logo.png ":size=35%") [Cherry picking](<(https://git-scm.com/docs/git-cherry-pick)>) in git means to choose one or more existing commits from one branch and apply it onto another. This is in contrast with other ways such as _merge_ and _rebase_ which normally apply many commits onto another branch.
 
 ### Cherry-picking commits
 
@@ -33,16 +31,15 @@ Strictly speaking, using git cherry-pick doesn’t alter the existing history wi
 
 #### Execution options
 
-* *-edit*: will cause git to prompt for a commit message before applying the cherry-pick operation. Nice to attache a representation commit message.
+- _-edit_: will cause git to prompt for a commit message before applying the cherry-pick operation. Nice to attache a representation commit message.
 
-* *--no-commit*: will execute the cherry pick but instead of making a new commit it will move the contents of the target commit into the working directory of the current branch.
+- _--no-commit_: will execute the cherry pick but instead of making a new commit it will move the contents of the target commit into the working directory of the current branch.
 
-* *--signoff*: will add a 'signoff' signature line to the end of the cherry-pick commit message.
-
+- _--signoff_: will add a 'signoff' signature line to the end of the cherry-pick commit message.
 
 #### Tips
 
-* If you want to merge without commit ids you can use this command
+- If you want to merge without commit ids you can use this command
 
 ```bash
 git cherry-pick master~2 master~0
@@ -54,7 +51,7 @@ The above command will merge last three commits of master from 1 to 3. If you wa
 git cherry-pick master~2
 ```
 
-* In case you needed to cherry pick a merge instead of a commit, you can use:
+- In case you needed to cherry pick a merge instead of a commit, you can use:
 
 ```bash
 git cherry-pick -m 1 <hash>
@@ -62,7 +59,7 @@ git cherry-pick -m 1 <hash>
 
 Be careful! It is preferred to use git merge instead of git cherry-pick. When you cherry-pick a merge commit, it collapses all the changes made into that one commit. You lose the commit history.
 
-* If you cherry-pick from a public branch, you should consider using:
+- If you cherry-pick from a public branch, you should consider using:
 
 ```bash
 git cherry-pick -x <commit-hash>
@@ -70,28 +67,27 @@ git cherry-pick -x <commit-hash>
 
 This will generate a standardized commit message. This way, you (and your co-workers) can still keep track of the origin of the commit and may avoid merge conflicts in the future.
 
-* If you want to select more than one commit at once, you can add their commit hashes separated by a space:
+- If you want to select more than one commit at once, you can add their commit hashes separated by a space:
 
 ```bash
 git cherry-pick C D
 ```
 
-* If you have notes attached to the commit they do not follow the cherry-pick. To bring them over as well, You have to use:
+- If you have notes attached to the commit they do not follow the cherry-pick. To bring them over as well, You have to use:
 
 ```bash
 git notes copy <from> <to>
 ```
 
-* Very usefull for releases and bug hotfixes. Consider following scenario.
-You have two branches:
-	* a) *release1* - This branch is going to your customer, but there are still some bugs to be fixed.
-	* b) *master* - Classic master branch, where you can for example add functionality for release2.
-You fix something in *release1*. Of course you need this fix also in *master*. And that is a typical use-case for cherry picking. So cherry pick in this scenario means that you take a commit from *release1* branch and include it into the *master* branch.
-
+- Very usefull for releases and bug hotfixes. Consider following scenario.
+  You have two branches:
+  - a) _release1_ - This branch is going to your customer, but there are still some bugs to be fixed.
+  - b) _master_ - Classic master branch, where you can for example add functionality for release2.
+    You fix something in _release1_. Of course you need this fix also in _master_. And that is a typical use-case for cherry picking. So cherry pick in this scenario means that you take a commit from _release1_ branch and include it into the _master_ branch.
 
 #### Caution!
 
-Cherry picking is commonly discouraged in developer community. The main reason is because it creates a *duplicate* commit with the same changes and you lose the ability to track the history of the original commit. If you can merge, then you should use that instead of cherry picking. Use it with caution!
+Cherry picking is commonly discouraged in developer community. The main reason is because it creates a _duplicate_ commit with the same changes and you lose the ability to track the history of the original commit. If you can merge, then you should use that instead of cherry picking. Use it with caution!
 
 #### Practical Example
 
@@ -130,9 +126,10 @@ $ git diff from-commit to-commit > output.diff
 ```
 
 where:
-* *from-commit*: the point at which we want the patch to start.
-* *to-commit*: the patch will span the changes up to and including this point.
-* *output.diff* the patch will be written here, if that file doesn't already exist, it will create it, and if it does already exist it will replace the contents with the output.
+
+- _from-commit_: the point at which we want the patch to start.
+- _to-commit_: the patch will span the changes up to and including this point.
+- _output.diff_ the patch will be written here, if that file doesn't already exist, it will create it, and if it does already exist it will replace the contents with the output.
 
 To create a diff between branches, you can run the following command:
 
@@ -151,4 +148,3 @@ or, just can follow the old-school using [patch](https://linux.die.net/man/1/pat
 ```bash
 $ patch -p1 < output.diff
 ```
-

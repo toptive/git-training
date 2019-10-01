@@ -21,7 +21,7 @@ $ git push -u origin master
 
 ## Step 2: create a python program
 
-Create a simple python program that *prints* the content of a file. Let's create a `main.py` file with the following code:
+Create a simple python program that _prints_ the content of a file. Let's create a `main.py` file with the following code:
 
 ```python
 #!/usr/bin/env python
@@ -120,12 +120,12 @@ $ git push origin master
 
 ## Cherry-picking a commit
 
-The goal will be apply only the commit `C4` from *master* to *new_feature*.
+The goal will be apply only the commit `C4` from _master_ to _new_feature_.
 
-1. On *master* branch, run `git pull` to ensure you have the latest changed
-2. On *master*, run `git log` in Terminal. Verify that changes that you want to apply.
+1. On _master_ branch, run `git pull` to ensure you have the latest changed
+2. On _master_, run `git log` in Terminal. Verify that changes that you want to apply.
 3. Check which commit hash/hashes are relevant and you want to have on the other branch as well.
-4. Move to the *new_feature* branch
+4. Move to the _new_feature_ branch
 5. Make sure you have the last commit on this branch. Run `git pull` again.
 
 ![Result](/img/cp-ex2.png)
@@ -141,9 +141,3 @@ $ git cherry-pick 39787bdd4e9eaf75267a73aba36d5e4f0140db1f
 At this point, just push the new change and you will apply only `C4` on `new_feature` branch. You will see a new commit on the branch.
 
 ![Result](/img/cp-ex4.png)
-
-
-
-
-
-

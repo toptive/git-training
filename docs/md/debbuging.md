@@ -16,10 +16,9 @@ $ git blame -L 8,12 docs/md/patches-example.md
 
 ![Result](/img/git-blame.png)
 
-The option `-L` limits the line output range. By following the *partial SHA-1* of a commit you can easily see who, when and how was a specific line of code modified.
+The option `-L` limits the line output range. By following the _partial SHA-1_ of a commit you can easily see who, when and how was a specific line of code modified.
 
 This command is helpful when you can assume the cause of the problem. What if you had no idea how to get back to a working state? This is where git bisect comes into play.
-
 
 ## Git Bisect
 
@@ -59,7 +58,7 @@ $ git bisect good 95d69a1
 $ git bisect bad f11c599
 ```
 
-5. Once you have assigned initial and final pointers for your search, Git walks you through the commit history and tags `good` and `bad` commits. This process continues until you successfully find out the *first* `bad` commit, the cause of your problem.
+5. Once you have assigned initial and final pointers for your search, Git walks you through the commit history and tags `good` and `bad` commits. This process continues until you successfully find out the _first_ `bad` commit, the cause of your problem.
 
 Now you can exit the git binary search mode by executing:
 
@@ -75,7 +74,7 @@ The advantage of git bisect is that reduces the number of commits that you would
 
 ### Tips
 
-* Automatically bisect a broken build between to between v1.2 and HEAD:
+- Automatically bisect a broken build between to between v1.2 and HEAD:
 
 ```bash
 $ git bisect start HEAD v1.2 --      # HEAD is bad, v1.2 is good
@@ -83,7 +82,8 @@ $ git bisect run make                # "make" builds the app
 $ git bisect reset                   # quit the bisect session
 ```
 
-* Automatically bisect a test failure between origin and HEAD:
+- Automatically bisect a test failure between origin and HEAD:
+
 ```bash
 $ git bisect start HEAD origin --    # HEAD is bad, origin is good
 $ git bisect run make test           # "make test" builds and tests
@@ -92,20 +92,21 @@ $ git bisect reset                   # quit the bisect session
 
 ## Git Grep
 
-This cmd allows us to efficiently and quickly search through the project for a string or regular expression in any of the files in your source code. It also avoids searching on *.gitignore* file.
+This cmd allows us to efficiently and quickly search through the project for a string or regular expression in any of the files in your source code. It also avoids searching on _.gitignore_ file.
 
 Additional options:
-* `-n` or `--line-number`: prints out the line numbers where Git has found matches.
-* `-i` or `--ignore-case`: ignores case differences between the searched keyword and the file.
-* `-c` or `--count`: Shows the number of matches found in the file for the inputted keyword.
-* `-p` or `--show-function`: displays the context of the searched keyword.
-* `--and`: ensures multiple matches in the same line of text.
+
+- `-n` or `--line-number`: prints out the line numbers where Git has found matches.
+- `-i` or `--ignore-case`: ignores case differences between the searched keyword and the file.
+- `-c` or `--count`: Shows the number of matches found in the file for the inputted keyword.
+- `-p` or `--show-function`: displays the context of the searched keyword.
+- `--and`: ensures multiple matches in the same line of text.
 
 ## Debugging Git network connection issues
 
 !> Problem: sometimes we are able to push to github but we aren't able to fetch/clone/pull from the repo. For example: `git fetch origin` it hangs there forever and doesn't respond at all.
 
-* Check your connectivity :P
+- Check your connectivity :P
 
 ```bash
 $ ping google.com
@@ -114,10 +115,10 @@ PING google.com (216.58.205.238): 56 data bytes
 64 bytes from 216.58.205.238: icmp_seq=0 ttl=46 time=124.577 ms
 ```
 
-* Check if you have access to the repo
-Since we are able to push to repo, we are pretty sure that we have access to the repo, but still :check:
+- Check if you have access to the repo
+  Since we are able to push to repo, we are pretty sure that we have access to the repo, but still :check:
 
-* Check if ssh/https was disabled.
+- Check if ssh/https was disabled.
 
 ```bash
 $ ssh git@github.com
@@ -127,17 +128,17 @@ Hi manusajith! You've successfully authenticated, but GitHub does not provide sh
 Connection to github.com closed.
 ```
 
-* Try changing your DNS to 8.8.8.8
+- Try changing your DNS to 8.8.8.8
 
 ?> Welcome to `GIT_TRACE`
 
 This configuration option gives us a more verbose trace to the git network connections and all the internal commands it goes through. This environment variable can accept the following values:
 
-* `1,2 or true`: git will print trace: messages on stderr telling about alias expansion, built-in command execution and external command execution.
+- `1,2 or true`: git will print trace: messages on stderr telling about alias expansion, built-in command execution and external command execution.
 
-* `greater than 1 and less than 10`:  git will interpret this value as an open file descriptor and will try to write the trace messages into this file descriptor.
+- `greater than 1 and less than 10`: git will interpret this value as an open file descriptor and will try to write the trace messages into this file descriptor.
 
-* `absolute path`: git will interpret this as a file path and will try to write the trace messages into it.
+- `absolute path`: git will interpret this as a file path and will try to write the trace messages into it.
 
 ```bash
 $ GIT_TRACE=1 git fetch origin
