@@ -4,7 +4,7 @@ Here, we'll focus on how we can use different techniques to share code between b
 
 ## Cherry-pick
 
-![logo](/img/cherry-pick-logo.png ":size=35%") [Cherry picking](<(https://git-scm.com/docs/git-cherry-pick)>) in git means to choose one or more existing commits from one branch and apply it onto another. This is in contrast with other ways such as _merge_ and _rebase_ which normally apply many commits onto another branch.
+![logo](/img/cherry-pick-logo.png ':size=35%') [Cherry picking](<(https://git-scm.com/docs/git-cherry-pick)>) in git means to choose one or more existing commits from one branch and apply it onto another. This is in contrast with other ways such as _merge_ and _rebase_ which normally apply many commits onto another branch.
 
 ### Cherry-picking commits
 
