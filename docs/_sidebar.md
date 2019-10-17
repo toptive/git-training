@@ -1,5 +1,6 @@
 - [Home 🏠](/README)
 - [Git 101](/md/basic)
-- [Branch Management](/md/branch-mng)
+- [Branching Management](/md/branch-mng)
 - [Patching](/md/patches)
 - [Debbuging](/md/debbuging)
+- [Open Source projects](/md/open-source)
