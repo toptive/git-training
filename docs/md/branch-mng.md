@@ -1,58 +1,39 @@
-# Branch Management
+# Branching
 
-## Force push to remote
+## Branches Model
 
-### Reasons to Force Push
+In Toptive we use Gitflow Workflow design that was first published and made popular by [Vincent Driessen at nvie](https://nvie.com/posts/a-successful-git-branching-model/) [MUST be read it]. The Gitflow Workflow defines a strict branching model designed around the project release. This provides a robust framework for managing larger projects.
 
-- Local version is better than the remote version
-- Remote version went wrong and needs repair
-- Versions have diverged and merging is undesirable
+![bm](/img/branch-modeling.png)
 
-```bash
-$ git push -f
-$ git push --force
-```
+We have two main branches with infinite lifetime:
 
-https://www.linkedin.com/learning/git-intermediate-techniques/force-push-to-a-remote
+- **master** — this branch contains production code. All development code is merged into master in sometime.
+- **develop** — this branch contains pre-production code. When the features are finished then they are merged into develop.
 
-## Identify merged branches
+During the development cycle, a variety of supporting branches are used:
 
-- List branches that have been merged into a branch
-- Useful for knowing what features have been incorporated
-- Useful for cleanup after merging many features
+- **feature** — feature branches are used to develop new features for the upcoming releases. May branch off from develop and must merge into develop.
 
-```bash
-$ git branch --merged
-```
+- **hotfix** — hotfix branches are necessary to act immediately upon an undesired status of master. May branch off from master and must merge into master anddevelop.
 
-```bash
-$ git branch --no-merged
-```
+- **release** — release branches support preparation of a new production release. They allow many minor bug to be fixed and preparation of meta-data for a release. May branch off from develop and must merge into master anddevelop.
 
-```bash
-$ git branch -r --merged
-```
+This ensures a clean state of branches at any given moment in the life cycle of project and the branches naming follows a systematic pattern making it easier to comprehend. Sometimes for a friendly Continuous Delivery and Continuous Integration we change the branch model.
+To know more about branch workflow strategies you can read this [post](https://medium.com/@patrickporto/4-branching-workflows-for-git-30d0aaee7bf).
 
-## Delete local and remote branches
+## Useful hints
 
-```bash
-# Delete branch
-# (Must be on a different branch)
-$ git branch -d new_feature
-```
+- **Force push to remote**: some reasons to Force Push are: Local version is better than the remote version, remote version went wrong and needs repair, Versions have diverged and merging is undesirable. `git push -f` or `git push --force`
 
-```bash
-# Delete not yet merged branch
-$ git branch -D new_feature
-```
+- **Identify merged branches**
 
-```bash
-# Delete remote branch
-$ git push origin :new_feature
-```
+  - List branches that have been merged into a branch: `git branch --merged`
+  - Useful for knowing what features have been incorporated: `git branch --no-merged`
+  - Useful for cleanup after merging many features: `git branch -r --merged`
 
-## Prune stale branches
+- **Delete local and remote branches**
 
-- Delete all stale remote-tracking branches
-- Remote-tracking branches, not remote branches
-- Stale branch: a remote-tracking branch that no longer tracks anything because the actual branch in the remote repository has been deleted.
+  - Delete branch (Must be on a different branch): `git branch -d new_feature`
+  - Delete not yet merged branch: `git branch -D new_feature`
+  - Delete remote branch: `git push origin :new_feature`

@@ -11,19 +11,15 @@ open-source project.
 
 This is the basic workflow to create a pull request
 
-### 1. Fork
+**1. Fork**
 
 Fork the Git repository, this is to create a copy of the original repository in your account.
 
-![fork](/img/fork.png)
-
-### 2. Clone
+**2. Clone**
 
 Once it is done, you will be able to see that repository in your account. Now click Clone/Download and copy the URL.
 Make sure you are cloning the repository that is in your account by checking the URL. It should have your GitHub
 username.
-
-![clone](/img/clone.png)
 
 Then just open your terminal and navigate to the parent folder for your project and execute the git clone command with
 the copied URL:
@@ -32,7 +28,7 @@ the copied URL:
 $ git clone <project-url>
 ```
 
-### 3. Create branch
+**3. Create branch**
 
 Navigate into the project folder `<project-url>` and create a feature branch for the changes you are going to make.
 
@@ -41,7 +37,7 @@ $ cd <project-url>
 $ git checkout -b branch-name
 ```
 
-### 4. Make your changes
+**4. Make your changes**
 
 After making the changes just add them to the branch and commit it with an appropriate message.
 
@@ -52,7 +48,7 @@ $ ...
 $ git commit -m "your proper comment explaining the changes made"
 ```
 
-### 5. Push your changes
+**5. Push your changes**
 
 Just push the changes that you have made on to the branch.
 
@@ -60,17 +56,40 @@ Just push the changes that you have made on to the branch.
 $ git push origin branch-name
 ```
 
-### 6. Create Pull Request
+**6. Create Pull Request**
 
 Once you pushed, go to your GitHub repository page. You should be able to see a yellow bar with Compare and Pull request
 button. Click that and add comments.
 
-![compare](/img/compare-branch.png)
+## Update a Local Fork
 
-If you are ready to create a PR after check your changes, just click on `Create pull request` button. Take care about
-base repository.
+With a locally cloned repository, you can do the same with git in your CLI as follows. First change to your repository folder, then confirm:
 
-![pr](/img/pr.png)
+```bash
+$ git remote -v
+```
 
-You have made a pull request. Now you have to wait till a reviewer merges your PR. You will see a notification once
-your PR is accepted and merged.
+Specify a remote upstream repo to sync with your fork:
+
+```bash
+$ git remote add upstream https://***.com/OriginalOwner/OriginalProject.git
+```
+
+Verify:
+
+```bash
+$ git remote -v
+```
+
+Fetch branches and commits from the upstream repo. You’ll be storing the commits to master in a local branch upstream/master:
+
+```bash
+$ git fetch upstream
+```
+
+Checkout your fork’s local master, then merge changes from upstream/master into it.
+
+```bash
+$ git checkout master
+$ git merge upstream/master
+```
