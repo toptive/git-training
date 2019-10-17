@@ -60,3 +60,36 @@ $ git push origin branch-name
 
 Once you pushed, go to your GitHub repository page. You should be able to see a yellow bar with Compare and Pull request
 button. Click that and add comments.
+
+## Update a Local Fork
+
+With a locally cloned repository, you can do the same with git in your CLI as follows. First change to your repository folder, then confirm:
+
+```bash
+$ git remote -v
+```
+
+Specify a remote upstream repo to sync with your fork:
+
+```bash
+$ git remote add upstream https://***.com/OriginalOwner/OriginalProject.git
+```
+
+Verify:
+
+```bash
+$ git remote -v
+```
+
+Fetch branches and commits from the upstream repo. You’ll be storing the commits to master in a local branch upstream/master:
+
+```bash
+$ git fetch upstream
+```
+
+Checkout your fork’s local master, then merge changes from upstream/master into it.
+
+```bash
+$ git checkout master
+$ git merge upstream/master
+```
